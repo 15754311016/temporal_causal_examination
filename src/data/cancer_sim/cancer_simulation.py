@@ -532,7 +532,13 @@ def simulate_counterfactual_1_step(simulation_params, seq_length):
             test_idx = test_idx + 1
 
             # Counterfactual prev_treatments and outcomes
-            treatment_options = [(0, 0), (0, 1), (1, 0), (1, 1)]  # First = chemo; second = radio
+
+            if simulation_params['binary_treatments']==None:
+                treatment_options = [(0, 0), (0, 1), (1, 0), (1, 1)]  # First = chemo; second = radio
+            if simulation_params['binary_treatments']=='chemo':
+                treatment_options = [(0, 0), (1, 0)]
+            if simulation_params['binary_treatments']=='radio':
+                treatment_options = [(0, 0), (0, 1)]
 
             for treatment_option in treatment_options:
                 if (factual_chemo_application_point[t] == treatment_option[0] and factual_radio_application_point[t] ==
