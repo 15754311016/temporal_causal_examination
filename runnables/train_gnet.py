@@ -100,7 +100,8 @@ def main(args: DictConfig):
 
     mlf_logger.log_metrics(encoder_results) if args.exp.logging else None
     results.update(encoder_results)
-
+    if args.dataset.binary_treatments != None:
+        return results
     test_rmses = {}
     if hasattr(dataset_collection, 'test_cf_treatment_seq_mc'):  # Test n_step_counterfactual rmse
         test_rmses = model.get_normalised_n_step_rmses(dataset_collection.test_cf_treatment_seq,

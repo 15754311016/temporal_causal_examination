@@ -175,7 +175,8 @@ def main(args: DictConfig):
 
     mlf_logger.log_metrics(encoder_results) if args.exp.logging else None
     results.update(encoder_results)
-
+    if args.dataset.binary_treatments != None:
+        return results
     # ============================== Initialisation & Training of Decoder ==============================
     if args.model.train_decoder:
         decoder = instantiate(args.model.decoder, args, encoder, dataset_collection, _recursive_=False)
