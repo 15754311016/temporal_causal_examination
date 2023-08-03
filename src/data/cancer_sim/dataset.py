@@ -131,7 +131,7 @@ class SyntheticCancerDataset(Dataset):
 
             if self.treatment_mode == 'multiclass':
                 if self.params['binary_treatments']!=None:
-                    one_hot_treatments = np.zeros(shape=(treatments.shape[0], treatments.shape[1], 1))
+                    one_hot_treatments = np.zeros(shape=(treatments.shape[0], treatments.shape[1], 2))
                 else:
                     one_hot_treatments = np.zeros(shape=(treatments.shape[0], treatments.shape[1], 4))
                 for patient_id in range(treatments.shape[0]):
@@ -147,14 +147,14 @@ class SyntheticCancerDataset(Dataset):
                                 one_hot_treatments[patient_id][timestep] = [0, 0, 0, 1]
                         if self.params['binary_treatments']=='chemo':
                             if (treatments[patient_id][timestep][0] == 0 and treatments[patient_id][timestep][1] == 0):
-                                one_hot_treatments[patient_id][timestep] = [0]
+                                one_hot_treatments[patient_id][timestep] = [1,0]
                             if (treatments[patient_id][timestep][0] == 1 and treatments[patient_id][timestep][1] == 0):
-                                one_hot_treatments[patient_id][timestep] = [1]
+                                one_hot_treatments[patient_id][timestep] = [0,1]
                         if self.params['binary_treatments']=='radio': 
                             if (treatments[patient_id][timestep][0] == 0 and treatments[patient_id][timestep][1] == 0):
-                                one_hot_treatments[patient_id][timestep] = [0]
+                                one_hot_treatments[patient_id][timestep] = [1,0]
                             if (treatments[patient_id][timestep][0] == 0 and treatments[patient_id][timestep][1] == 1):
-                                one_hot_treatments[patient_id][timestep] = [1]
+                                one_hot_treatments[patient_id][timestep] = [0,1]
 
 
                 one_hot_previous_treatments = one_hot_treatments[:, :-1, :]
