@@ -130,17 +130,32 @@ class SyntheticCancerDataset(Dataset):
                 [chemo_application[:, :-offset, np.newaxis], radio_application[:, :-offset, np.newaxis]], axis=-1)
 
             if self.treatment_mode == 'multiclass':
-                one_hot_treatments = np.zeros(shape=(treatments.shape[0], treatments.shape[1], 4))
+                if self.params['binary_treatments']!=None:
+                    one_hot_treatments = np.zeros(shape=(treatments.shape[0], treatments.shape[1], 1))
+                else:
+                    one_hot_treatments = np.zeros(shape=(treatments.shape[0], treatments.shape[1], 4))
                 for patient_id in range(treatments.shape[0]):
                     for timestep in range(treatments.shape[1]):
-                        if (treatments[patient_id][timestep][0] == 0 and treatments[patient_id][timestep][1] == 0):
-                            one_hot_treatments[patient_id][timestep] = [1, 0, 0, 0]
-                        elif (treatments[patient_id][timestep][0] == 1 and treatments[patient_id][timestep][1] == 0):
-                            one_hot_treatments[patient_id][timestep] = [0, 1, 0, 0]
-                        elif (treatments[patient_id][timestep][0] == 0 and treatments[patient_id][timestep][1] == 1):
-                            one_hot_treatments[patient_id][timestep] = [0, 0, 1, 0]
-                        elif (treatments[patient_id][timestep][0] == 1 and treatments[patient_id][timestep][1] == 1):
-                            one_hot_treatments[patient_id][timestep] = [0, 0, 0, 1]
+                        if self.params['binary_treatments']==None:
+                            if (treatments[patient_id][timestep][0] == 0 and treatments[patient_id][timestep][1] == 0):
+                                one_hot_treatments[patient_id][timestep] = [1, 0, 0, 0]
+                            elif (treatments[patient_id][timestep][0] == 1 and treatments[patient_id][timestep][1] == 0):
+                                one_hot_treatments[patient_id][timestep] = [0, 1, 0, 0]
+                            elif (treatments[patient_id][timestep][0] == 0 and treatments[patient_id][timestep][1] == 1):
+                                one_hot_treatments[patient_id][timestep] = [0, 0, 1, 0]
+                            elif (treatments[patient_id][timestep][0] == 1 and treatments[patient_id][timestep][1] == 1):
+                                one_hot_treatments[patient_id][timestep] = [0, 0, 0, 1]
+                        if self.params['binary_treatments']=='chemo':
+                            if (treatments[patient_id][timestep][0] == 0 and treatments[patient_id][timestep][1] == 0):
+                                one_hot_treatments[patient_id][timestep] = [0]
+                            if (treatments[patient_id][timestep][0] == 1 and treatments[patient_id][timestep][1] == 0):
+                                one_hot_treatments[patient_id][timestep] = [1]
+                        if self.params['binary_treatments']=='radio': 
+                            if (treatments[patient_id][timestep][0] == 0 and treatments[patient_id][timestep][1] == 0):
+                                one_hot_treatments[patient_id][timestep] = [0]
+                            if (treatments[patient_id][timestep][0] == 0 and treatments[patient_id][timestep][1] == 1):
+                                one_hot_treatments[patient_id][timestep] = [1]
+
 
                 one_hot_previous_treatments = one_hot_treatments[:, :-1, :]
 
