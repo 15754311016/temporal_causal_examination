@@ -1,0 +1,13 @@
+Collecting pandas
+  Using cached pandas-2.0.2-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (12.3 MB)
+Collecting python-dateutil>=2.8.2 (from pandas)
+  Using cached python_dateutil-2.8.2-py2.py3-none-any.whl (247 kB)
+Collecting pytz>=2020.1 (from pandas)
+  Using cached pytz-2023.3-py2.py3-none-any.whl (502 kB)
+Collecting tzdata>=2022.1 (from pandas)
+  Using cached tzdata-2023.3-py2.py3-none-any.whl (341 kB)
+Requirement already satisfied: numpy>=1.20.3 in /home/qianghuang/venv/lib/python3.8/site-packages (from pandas) (1.24.3)
+Collecting six>=1.5 (from python-dateutil>=2.8.2->pandas)
+  Using cached six-1.16.0-py2.py3-none-any.whl (11 kB)
+Installing collected packages: pytz, tzdata, six, python-dateutil, pandas
+Successfully installed pandas-2.0.2 python-dateutil-2.8.2 pytz-2023.3 six-1.16.0 tzdata-2023.3

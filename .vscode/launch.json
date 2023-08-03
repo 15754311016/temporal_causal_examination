@@ -1,0 +1,26 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    // python3 runnables/train_multi.py -m +dataset=cancer_sim +backbone=ct +backbone/ct_hparams/cancer_sim_domain_conf="'0','1','2','3','6','8','10'" exp.weight_bceloss=1 exp.seed=10,101,1010,10101,101010, dataset.binary_treatments=chemo
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python_data_generation",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/runnables/train_multi.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env":{
+            "PYTHONPATH":".", "CUDA_VISIBLE_DEVICES":"0","HYDRA_FULL_ERROR":"1"
+            },
+            "args":[
+            "-m", "+dataset=cancer_sim",
+            "+backbone=ct","+backbone/ct_hparams/cancer_sim_domain_conf='0'",
+            "exp.weight_bceloss=1", "exp.seed=10",
+            "dataset.binary_treatments=chemo"
+            ]
+        }
+    ]
+}

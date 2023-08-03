@@ -1,0 +1,27 @@
+model:
+  dim_treatments: ???
+  dim_vitals: ???
+  dim_static_features: ???
+  dim_outcomes: ???
+dataset:
+  val_batch_size: ???
+  treatment_mode: ???
+exp:
+  seed: 100
+  gpus:
+  - 0
+  max_epochs: 100
+  logging: true
+  mlflow_uri: http://127.0.0.1:5003
+  unscale_rmse: ???
+  percentage_rmse: ???
+  alpha: 1.0
+  update_alpha: true
+  alpha_rate: exp
+  balancing: null
+  bce_weight: false
+  weights_ema: null
+  beta: 0.99
+  weight_bceloss: null
+  chemo: 5.0
+  radio: 2.0
